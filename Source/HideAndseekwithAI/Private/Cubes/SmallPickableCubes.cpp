@@ -78,6 +78,7 @@ void ASmallPickableCubes::Attaching()
 	GetStaticMeshComponent()->SetCollisionResponseToAllChannels(ECR_Overlap);
 	SetActorLocation(FVector(0.0f));
 	AttachToComponent(PlayerPawn->GetLeftHandGrip(), FAttachmentTransformRules::KeepRelativeTransform);
+	SetWhoIsCarrying(PlayerPawn);
 }
 
 void ASmallPickableCubes::Detaching(float Distance)
@@ -85,6 +86,7 @@ void ASmallPickableCubes::Detaching(float Distance)
 	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
 	GetStaticMeshComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	Throwed(Distance);
+	SetWhoIsCarrying(nullptr);
 }
 
 void ASmallPickableCubes::Throwed(float Distance)
@@ -95,5 +97,15 @@ void ASmallPickableCubes::Throwed(float Distance)
 	FVector Forward = PlayerPawn->GetFirstPersonCameraComponent()->GetForwardVector();
 	GetStaticMeshComponent()->SetNotifyRigidBodyCollision(true);
 	GetStaticMeshComponent()->AddImpulse(Forward*Distance,NAME_None,true);
+}
+
+AActor* ASmallPickableCubes::getWhoIsCarrying()
+{
+	return WhoisCarryingMe;
+}
+
+void ASmallPickableCubes::SetWhoIsCarrying(AActor* newWhoisCarrying)
+{
+	WhoisCarryingMe = newWhoisCarrying;
 }
 

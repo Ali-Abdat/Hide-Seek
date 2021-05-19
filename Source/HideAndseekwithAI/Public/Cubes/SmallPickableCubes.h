@@ -30,6 +30,7 @@ public:
 		FVector CurrentLoc;
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = SmallBrick)
 		bool IsChangedLocation;
+	
 	/*
 	* called when pawn enters the Box component
 	*/
@@ -60,4 +61,19 @@ public:
 	 */
 	UFUNCTION(Category = Component)
 		void Throwed(float Distance);
+	/**
+	 * To get WhoisCarryingMe
+	 */
+	UFUNCTION(BlueprintCallable,BlueprintPure, Category = Component)
+		AActor* getWhoIsCarrying();
+	/**
+	 * To Set WhoisCarryingMe
+	 * @param newWhoisCarrying is the Ref that will set WhoisCarryingMe
+	 */
+	UFUNCTION(BlueprintCallable,Category = Component)
+		void SetWhoIsCarrying(AActor* newWhoisCarrying);
+
+private: 
+	UPROPERTY()
+		AActor* WhoisCarryingMe;
 };

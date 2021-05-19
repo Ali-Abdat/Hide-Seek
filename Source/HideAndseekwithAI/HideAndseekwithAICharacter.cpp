@@ -41,6 +41,7 @@ AHideAndseekwithAICharacter::AHideAndseekwithAICharacter()
 	//Create Scene Component
 	LeftHandGrip = CreateDefaultSubobject<USceneComponent>(TEXT("grip"));
 	LeftHandGrip->SetupAttachment(Mesh1P,"hand_l");
+	LeftHandGrip->SetRelativeLocation(FVector(14.f, -18.f, -10.f)); // Position the camera
 
 	StartHolding = false;
 	InHand = false;
